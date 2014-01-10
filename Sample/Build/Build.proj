@@ -1,0 +1,27 @@
+<Project DefaultTargets="GenerateMsi" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <UsingTask AssemblyFile="..\..\Src\BtsMsiTask\bin\Debug\BtsMsiTask.dll" TaskName="BtsMsiTask.MsiTask" />
+  <PropertyGroup>
+    <DestinationPath>C:\Users\Administrator\Desktop\Terra</DestinationPath>
+    <ApplicationName>BtsSsample2</ApplicationName>
+    <!--Optional-->
+    <!--<ApplicationDescription>Test description ...</ApplicationDescription>-->
+    <!--Optional-->
+    <!--<Version>1.0.0.1</Version>-->
+  </PropertyGroup>
+  <ItemGroup>
+    <Resource Include="..\BtsSample.Transforms\bin\Debug\BtsSample.Transforms.dll" />
+    <Resource Include="..\BtsSample.Schemas\bin\Debug\BtsSample.Schemas.dll" />
+    <Resource Include="..\BtsSample.Pipelines\bin\Debug\BtsSample.Pipelines.dll" />
+    <Resource Include="..\BtsSample.Orchestrations\bin\Debug\BtsSample.Orchestrations.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <ReferenceApplication Include="BtsSample.SharedSchemas" />
+  </ItemGroup>
+  <Target Name="GenerateMsi">
+    <MsiTask  ApplicationDescription="$(ApplicationDescription)"
+              Version="$(Version)"
+              DestinationPath="$(DestinationPath)" 
+              ApplicationName="$(ApplicationName)" 
+              Resources="@(Resource)" />
+  </Target>
+</Project>
