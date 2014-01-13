@@ -1,6 +1,8 @@
+# TODO: Version and file output should be received as incoming parameters
+
 !define Name "BtsMsiTask"
 Name "${Name}"
-Outfile "${Name}-0.1.exe"
+Outfile "..\${Name}-0.1.exe"
 RequestExecutionLevel admin ;Require admin rights on NT6+ (When UAC is turned on)
 InstallDir "$ProgramFiles\${Name}"
 
