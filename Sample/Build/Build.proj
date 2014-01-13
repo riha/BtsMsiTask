@@ -1,12 +1,12 @@
 <Project DefaultTargets="GenerateMsi" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <UsingTask AssemblyFile="..\..\Src\BtsMsiTask\bin\Debug\BtsMsiTask.dll" TaskName="BtsMsiTask.MsiTask" />
+  <Import Project="..\..\Src\BtsMsiTask.targets" />
   <PropertyGroup>
-    <DestinationPath>C:\Users\Administrator\Desktop\Terra</DestinationPath>
-    <ApplicationName>BtsSsample2</ApplicationName>
+    <DestinationPath>C:\Users\Administrator\Desktop\BtsSample</DestinationPath>
+    <ApplicationName>BtsSampleApp</ApplicationName>
     <!--Optional-->
-    <!--<ApplicationDescription>Test description ...</ApplicationDescription>-->
+    <ApplicationDescription>Test description ...</ApplicationDescription>
     <!--Optional-->
-    <!--<Version>1.0.0.1</Version>-->
+    <Version>1.0.0.1</Version>
   </PropertyGroup>
   <ItemGroup>
     <Resource Include="..\BtsSample.Transforms\bin\Debug\BtsSample.Transforms.dll" />
@@ -20,8 +20,8 @@
   <Target Name="GenerateMsi">
     <MsiTask  ApplicationDescription="$(ApplicationDescription)"
               Version="$(Version)"
-              DestinationPath="$(DestinationPath)" 
-              ApplicationName="$(ApplicationName)" 
+              DestinationPath="$(DestinationPath)"
+              ApplicationName="$(ApplicationName)"
               Resources="@(Resource)" />
   </Target>
 </Project>
