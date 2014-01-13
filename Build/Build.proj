@@ -1,0 +1,30 @@
+<Project DefaultTargets="Compile;Copy;Package" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <DeployFolder>..\Deploy</DeployFolder>
+    <Configuration>Debug</Configuration>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectsToBuild Include="..\Src\BtsMsiTask\BtsMsiTask.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <AddtionalFiles Include="..\Src\BtsMsiTask.targets" />
+  </ItemGroup>
+  <Target Name="Compile">
+    <MSBuild Projects ="@(ProjectsToBuild)"
+            ContinueOnError ="false"
+            Properties="Configuration=$(Configuration)">
+      <Output ItemName="OutputFiles" TaskParameter="TargetOutputs"/>
+    </MSBuild>
+  </Target>
+  <Target Name="Copy">
+    <CreateItem Include="..\Src\BtsMsiTask\bin\$(Configuration)\*">
+      <Output ItemName="AllOutputFiles" TaskParameter="Include"/>
+    </CreateItem>
+    
+    <Copy SourceFiles="@(AllOutputFiles)" DestinationFolder="$(DeployFolder)" />
+    <Copy SourceFiles="@(AddtionalFiles)" DestinationFolder="$(DeployFolder)" />
+  </Target>
+  <Target Name="Package">
+    <Exec command="..\Tools\NSIS\makensis.exe Package.nsi" WorkingDirectory="" />
+  </Target>
+</Project>
