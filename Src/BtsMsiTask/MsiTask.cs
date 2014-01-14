@@ -103,6 +103,8 @@ namespace BtsMsiTask
                 db.MakeCustomModifications(productCode, ApplicationName);
                 db.Commit();
             }
+            
+            Log.LogMessage(MessageImportance.Normal, "MSI was successfully generated at {0}", destinationFilePath);
 
             return true;
         }
