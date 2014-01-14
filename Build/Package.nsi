@@ -1,23 +1,29 @@
-# TODO: Version and file output should be received as incoming parameters
+/*
+	Must receive Name, Version and Path parameters from command line.
+	Example: makensis /dVersion=1.0 /dDestination=c:\Test
+*/ 
 
 !define Name "BtsMsiTask"
-Name "${Name}"
-Outfile "..\${Name}-0.1.exe"
+#Name "${Name}"
+
+Outfile "..\${Name}-${Version}.exe"
+
 RequestExecutionLevel admin ;Require admin rights on NT6+ (When UAC is turned on)
-InstallDir "$ProgramFiles\${Name}"
+
+InstallDir "${Destination}\${Name}"
 
 !include LogicLib.nsh
 !include MUI.nsh
 
 Function .onInit
-SetShellVarContext all
-UserInfo::GetAccountType
-pop $0
-${If} $0 != "admin" ;Require admin rights on NT4+
-    MessageBox mb_iconstop "Administrator rights required!"
-    SetErrorLevel 740 ;ERROR_ELEVATION_REQUIRED
-    Quit
-${EndIf}
+	SetShellVarContext all
+	UserInfo::GetAccountType
+	pop $0
+	${If} $0 != "admin" ;Require admin rights on NT4+
+		MessageBox mb_iconstop "Administrator rights required!"
+		SetErrorLevel 740 ;ERROR_ELEVATION_REQUIRED
+		Quit
+	${EndIf}
 FunctionEnd
 
 !insertmacro MUI_PAGE_WELCOME
