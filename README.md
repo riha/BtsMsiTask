@@ -1,4 +1,4 @@
-## BtsMsiTask ##
+# BtsMsiTask #
 *BtsMsiTask* expose a task for generating a MSI package directly from or many BizTalk project, without having to first install the resources into BizTalk Server. Read more about how and why to use the package in this blog post (soon).
 
 Download the project source and check the included sample for further information.
@@ -73,12 +73,12 @@ Finally call the `MsiTask` with the declared parameters.
     </tr>
     <tr>
 		<td>DestinationPath</td>
-		<td>**Required**</td>
-		<td>The end distanation to where the MSI will be published. By default the MSI file will be named as: `ApplicationName-yyyyMMddHHmmss`.</td>
+		<td><i>Required</i></td>
+		<td>The end distanation to where the MSI will be published. By default the MSI file will be named as: <i>ApplicationName-yyyyMMddHHmmss</i>.</td>
 	</tr>
     <tr>
 		<td>ApplicationName</td>
-		<td>Required</td>
+		<td><i>Required</i></td>
 		<td>The BizTalk Application that be created/updated by the MSI.</td>
 	</tr>
     <tr>
@@ -89,17 +89,17 @@ Finally call the `MsiTask` with the declared parameters.
     <tr>
 		<td>Version</td>
 		<td>Optional</td>
-		<td>A possible version number added to the MSI. Uses a `1.0.0.0` format.</td>
+		<td>A possible version number added to the MSI. Uses a <i>1.0.0.0</i> format.</td>
 	</tr>
     <tr>
 		<td>Resource (ItemGroup)</td>
-		<td>Required</td>
+		<td><i>Required</i></td>
 		<td>A list of resources that should be added to the MSI.</td>
 	</tr>
     <tr>
 		<td>ReferenceApplication (ItemGroup)</td>
 		<td>Optional</td>
-		<td>List of BizTalk application that should be refernces as the MIS is imported. By default the "System.BizTalk" is added.</td>
+		<td>List of BizTalk application that should be refernces as the MIS is imported. By default the <i>System.BizTalk</i> is added.</td>
 	</tr>
 </table>
  
