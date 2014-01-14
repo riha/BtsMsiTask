@@ -1,7 +1,7 @@
 <Project DefaultTargets="GenerateMsi" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="..\..\Src\BtsMsiTask.targets" />
+  <Import Project="..\..\Src\BtsMsiTask\bin\Debug\BtsMsiTask.targets" />
   <PropertyGroup>
-    <DestinationPath>C:\Users\Administrator\Desktop\BtsSample</DestinationPath>
+    <DestinationPath>C:\Temp\BtsSample</DestinationPath>
     <ApplicationName>BtsSampleApp</ApplicationName>
     <!--Optional-->
     <ApplicationDescription>Test description ...</ApplicationDescription>

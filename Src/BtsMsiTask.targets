@@ -1,3 +1,3 @@
 <Project DefaultTargets="GenerateMsi" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <UsingTask AssemblyFile="..\Deploy\BtsMsiTask.dll" TaskName="BtsMsiTask.MsiTask" />
+  <UsingTask AssemblyFile="BtsMsiTask.dll" TaskName="BtsMsiTask.MsiTask" />
 </Project>
