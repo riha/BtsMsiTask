@@ -104,7 +104,7 @@ Finally call the `MsiTask` with the declared parameters.
 </table>
  
 ## Limitations  ##
-- BtsMsiTask is currently only tested on BizTalk Server 2013.
+- BtsMsiTask is currently only tested on BizTalk Server 2013 and BizTalk 2010.
 - BizTalk MSI packages allows for several different resources to be added (bindings, pre and post scripts, web service definitions, non BizTalk dll etc). BtsMsiTask currently however only support BizTalk Server dlls.  
 
 ## Releases ##
