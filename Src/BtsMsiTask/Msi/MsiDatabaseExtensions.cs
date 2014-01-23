@@ -121,7 +121,7 @@ namespace BtsMsiTask.Msi
                         record1[4] = FileHelper.FileSize(cabFilePath);
                         record1[8] = ++num;
                         view1.Assign(record1);
-                        System.IO.File.Copy(cabFilePath, Path.Combine(mediaStream, (string)record1[1]));
+                        File.Copy(cabFilePath, Path.Combine(mediaStream, (string)record1[1]));
                     }
 
                     UpdateMediaCab(db, mediaStream, num);
@@ -158,8 +158,8 @@ namespace BtsMsiTask.Msi
         {
             string tempFileName = Path.GetTempFileName();
 
-            if (System.IO.File.Exists(tempFileName))
-                System.IO.File.Delete(tempFileName);
+            if (File.Exists(tempFileName))
+                File.Delete(tempFileName);
 
             string cabFileName = Path.ChangeExtension(tempFileName, ".cab");
 

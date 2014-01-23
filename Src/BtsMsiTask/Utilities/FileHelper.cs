@@ -6,9 +6,11 @@ namespace BtsMsiTask.Utilities
 {
     public static class FileHelper
     {
-        public static string GetMsiFileName(string applicationName)
+        public static string GetMsiFileName(string applicationName, string buildNumber)
         {
-            return string.Concat(applicationName, DateTime.Now.ToString("-yyyyMMddHHmmss"), ".msi");
+            return !string.IsNullOrEmpty(buildNumber) 
+                ? string.Concat(buildNumber, ".msi") 
+                : string.Concat(applicationName, DateTime.Now.ToString("-yyyyMMddHHmmss"), ".msi");
         }
 
         public static string GetValidFilename(string filename)

@@ -7,6 +7,8 @@
     <ApplicationDescription>Test description ...</ApplicationDescription>
     <!--Optional-->
     <Version>1.0.0.1</Version>
+      <!--Optional-->
+    <BuildNumber>Build 23456_2</BuildNumber>
   </PropertyGroup>
   <ItemGroup>
     <Resource Include="..\BtsSample.Transforms\bin\Debug\BtsSample.Transforms.dll" />
@@ -20,6 +22,7 @@
   <Target Name="GenerateMsi">
     <MsiTask  ApplicationDescription="$(ApplicationDescription)"
               Version="$(Version)"
+              BuildNumber="$(BuildNumber)"
               DestinationPath="$(DestinationPath)"
               ApplicationName="$(ApplicationName)"
               Resources="@(Resource)" />

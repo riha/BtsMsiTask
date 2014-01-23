@@ -41,6 +41,11 @@ namespace BtsMsiTask
         public string Version { get; set; }
 
         /// <summary>
+        /// Optional build number, if used it as the MSI file name.
+        /// </summary>
+        public string BuildNumber { get; set; }
+
+        /// <summary>
         /// All the dll an other resources that should be packed as part of the MSI.
         /// </summary>
         [Required]
@@ -88,7 +93,7 @@ namespace BtsMsiTask
             var adfFileWriter = new AdfFileWriter();
             var adfFilePath = adfFileWriter.Write(resources, ApplicationName, ApplicationDescription, references, version.ToString());
 
-            var destinationFilePath = Path.Combine(DestinationPath, FileHelper.GetMsiFileName(ApplicationName));
+            var destinationFilePath = Path.Combine(DestinationPath, FileHelper.GetMsiFileName(ApplicationName, BuildNumber));
             MsiFileWriter.Write(destinationFilePath);
 
             var productCode = Guid.NewGuid();
