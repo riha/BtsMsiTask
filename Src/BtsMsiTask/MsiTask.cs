@@ -19,31 +19,36 @@ namespace BtsMsiTask
     public class MsiTask : Task
     {
         /// <summary>
-        /// A full path to where the MSI final should be written.
+        /// Full path to the final destination of the MSI. In a build server scenario this would the folder that's being compiled to.
         /// </summary>
         [Required]
         public string DestinationPath { get; set; }
 
         /// <summary>
-        /// The name of the BizTalk application, used when importing the MSI in BizTalk.
+        /// The name of the BizTalk application. Used when importing the MSI in BizTalk to either create a new application or update an existing.
         /// </summary>
         [Required]
         public string ApplicationName { get; set; }
 
         /// <summary>
-        /// Optional BizTalk Application description
+        /// Optional BizTalk Application description. Updated or created when importing MSI.
         /// </summary>
         public string ApplicationDescription { get; set; }
 
         /// <summary>
-        /// Optional version, will be added to the MSI properties
+        /// Optional version, will be added to the MSI properties.
         /// </summary>
         public string Version { get; set; }
 
         /// <summary>
-        /// Optional build number, if used it as the MSI file name.
+        /// Optional build number. If set if will be part of the MSI file name.
         /// </summary>
         public string BuildNumber { get; set; }
+
+        /// <summary>
+        /// Optional source location path. If set if will be part of the MSI property for source location and visible in the BizTalk Administration console.
+        /// </summary>
+        public string SourceLocation { get; set; }
 
         /// <summary>
         /// All the dll an other resources that should be packed as part of the MSI.
@@ -91,7 +96,7 @@ namespace BtsMsiTask
             var cabFolderPath = cabFileWriter.Write(resources);
 
             var adfFileWriter = new AdfFileWriter();
-            var adfFilePath = adfFileWriter.Write(resources, ApplicationName, ApplicationDescription, references, version.ToString());
+            var adfFilePath = adfFileWriter.Write(resources, ApplicationName, ApplicationDescription, references, version.ToString(), SourceLocation);
 
             var destinationFilePath = Path.Combine(DestinationPath, FileHelper.GetMsiFileName(ApplicationName, BuildNumber));
             MsiFileWriter.Write(destinationFilePath);
