@@ -50,7 +50,7 @@ namespace BtsSample.Pipelines
 "rs=\"-1\" execMethod=\"All\" stageId=\"9d0e410e-4cce-4536-83fa-4a5040674ad6\" />      <Components />    </"+
 "Stage>  </Stages></Document>";
         
-        private const string _versionDependentGuid = "a626e087-ec78-44ee-97ab-c6d2eec8a510";
+        private const string _versionDependentGuid = "f530b63d-c19c-4e8a-924b-36b308f2116c";
         
         public ReceiveValidateXmlPipeline()
         {
