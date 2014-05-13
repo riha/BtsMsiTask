@@ -9,7 +9,7 @@ namespace BtsMsiTask.Msi
     {
         public static void Write(string destinationPath)
         {
-            //TODO: Needs to be dynamic when supporting multiple BizTalk versions
+            // TODO: Needs to be dynamic when supporting multiple BizTalk versions
             const string btVersionFolderName = "Msi.BT2013";
             var asssembly = Assembly.GetExecutingAssembly();
             const string msiName = "ApplicationTemplate.msi";
@@ -33,6 +33,7 @@ namespace BtsMsiTask.Msi
         public static IDictionary<string, object> GetProperties(string productName, Version productVersion, Guid productCode, Guid upgradeCode)
         {
             IDictionary<string, object> dictionary = new Dictionary<string, object>();
+            
             dictionary.Add("ProductName", productName);
             dictionary.Add("ProductVersion", productVersion.ToString());
             dictionary.Add("ProductCode", productCode.ToString("B").ToUpperInvariant());
@@ -44,6 +45,7 @@ namespace BtsMsiTask.Msi
             dictionary.Add("ApplicationUsers", "AllUsers");
             dictionary.Add("FolderForm_AllUsersVisible", 0);
             dictionary.Add("ARPSYSTEMCOMPONENT", 1);
+
             return dictionary;
         }
     }

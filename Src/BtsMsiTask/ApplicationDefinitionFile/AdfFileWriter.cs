@@ -13,24 +13,6 @@ namespace BtsMsiTask.ApplicationDefinitionFile
         private static readonly XNamespace XsiNs = "http://www.w3.org/2001/XMLSchema-instance";
         private static readonly XNamespace XsdNs = "http://www.w3.org/2001/XMLSchema";
 
-        private XElement CreateReferenceXElement(string reference)
-        {
-            return new XElement(AdfNs + "Reference", new XAttribute("Name", reference));
-        }
-
-        private XElement CreatePropertyXElement(PropertyNode propertyNode)
-        {
-            if (propertyNode.Value == null)
-                propertyNode.Value = string.Empty;
-
-            return new XElement(AdfNs + "Property", new XAttribute("Name", propertyNode.Name), new XAttribute("Value", propertyNode.Value));
-        }
-
-        private XElement CreateFileXElement(FileNode fileNode)
-        {
-            return new XElement(AdfNs + "File", new XAttribute("RelativePath", fileNode.RelativePath), new XAttribute("Key", fileNode.Key));
-        }
-
         public string Write(IEnumerable<BizTalkAssemblyResource> resources, string applicationName, string description, IEnumerable<string> references, string version, string sourceLocation)
         {
             var propertyNodes = GetPropertyNodes(applicationName, description, version);
@@ -69,6 +51,24 @@ namespace BtsMsiTask.ApplicationDefinitionFile
             content.Save(filePath);
 
             return filePath;
+        }
+
+        private XElement CreateReferenceXElement(string reference)
+        {
+            return new XElement(AdfNs + "Reference", new XAttribute("Name", reference));
+        }
+
+        private XElement CreatePropertyXElement(PropertyNode propertyNode)
+        {
+            if (propertyNode.Value == null)
+                propertyNode.Value = string.Empty;
+
+            return new XElement(AdfNs + "Property", new XAttribute("Name", propertyNode.Name), new XAttribute("Value", propertyNode.Value));
+        }
+
+        private XElement CreateFileXElement(FileNode fileNode)
+        {
+            return new XElement(AdfNs + "File", new XAttribute("RelativePath", fileNode.RelativePath), new XAttribute("Key", fileNode.Key));
         }
 
         private IEnumerable<ResourceNode> GetResourceNodes(IEnumerable<BizTalkAssemblyResource> resources, string sourceLocation)
