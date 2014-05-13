@@ -13,11 +13,13 @@
     <SourceLocation>\\acme.com\drops$\Build 23456_2</SourceLocation>
   </PropertyGroup>
   <ItemGroup>
-    <Resource Include="..\BtsSample.Transforms\bin\Debug\BtsSample.Transforms.dll" />
-    <Resource Include="..\BtsSample.Schemas\bin\Debug\BtsSample.Schemas.dll" />
-    <Resource Include="..\BtsSample.Pipelines\bin\Debug\BtsSample.Pipelines.dll" />
-    <Resource Include="..\BtsSample.Orchestrations\bin\Debug\BtsSample.Orchestrations.dll" />
+    <Resource Include="..\BtsSample.Utilities\bin\Debug\BtsSample.Utilities.dll" />
+    <BtsAssembly Include="..\BtsSample.Transforms\bin\Debug\BtsSample.Transforms.dll" />
+    <BtsAssembly Include="..\BtsSample.Schemas\bin\Debug\BtsSample.Schemas.dll" />
+    <BtsAssembly Include="..\BtsSample.Pipelines\bin\Debug\BtsSample.Pipelines.dll" />
+    <BtsAssembly Include="..\BtsSample.Orchestrations\bin\Debug\BtsSample.Orchestrations.dll" />
   </ItemGroup>
+
   <ItemGroup>
     <ReferenceApplication Include="BtsSample.SharedSchemas" />
   </ItemGroup>
@@ -28,6 +30,7 @@
               DestinationPath="$(DestinationPath)"
               SourceLocation="$(SourceLocation)"
               ApplicationName="$(ApplicationName)"
+              BtsAssemblies="@(BtsAssembly)"
               Resources="@(Resource)" />
   </Target>
 </Project>
