@@ -56,6 +56,8 @@
     <Compile Include="ApplicationDefinitionFile\PropertyNode.cs" />
     <Compile Include="ApplicationDefinitionFile\FileNode.cs" />
     <Compile Include="ApplicationDefinitionFile\ResourceNode.cs" />
+    <Compile Include="Model\BaseResource.cs" />
+    <Compile Include="Model\AssemblyResource.cs" />
     <Compile Include="Msi\MsiDatabaseExtensions.cs" />
     <Compile Include="Utilities\FileHelper.cs" />
     <Compile Include="MsiTask.cs" />
