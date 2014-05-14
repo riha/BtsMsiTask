@@ -53,7 +53,11 @@ namespace BtsMsiTask
         /// <summary>
         /// All the dll an other resources that should be packed as part of the MSI.
         /// </summary>
-        [Required]
+        public ITaskItem[] BtsAssemblies { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
         public ITaskItem[] Resources { get; set; }
 
         /// <summary>
@@ -79,14 +83,20 @@ namespace BtsMsiTask
 
             if (!Directory.Exists(DestinationPath))
                 Directory.CreateDirectory((DestinationPath));
-            
+
+            if (!BtsAssemblies.Any() && !Resources.Any())
+            {
+                throw new ArgumentException("No BizTalk Assemblies and no assembly resources found in build project input");
+            }
+
             // TODO: Add all checking of parameters to separate classes
             // TODO: Check all required in parameters and set possible defaults
             // TODO: Check that it's BT 2013 server from registry
             // TODO: Is it possible to check if assembly is signed or not?
             // TODO: Check that these are only BizTalk resources for now
 
-            var resources = Resources.Select(r => new BizTalkAssemblyResource(r.GetMetadata("Fullpath"))).ToList();
+            var resources = BtsAssemblies.Select(r => new BizTalkAssemblyResource(r.GetMetadata("Fullpath"))).ToList<BaseResource>();
+            resources.AddRange(Resources.Select(r => new AssemblyResource(r.GetMetadata("Fullpath"))).ToList());
 
             var references = new List<string> { "BizTalk.System" };
             if (References != null)
@@ -113,7 +123,7 @@ namespace BtsMsiTask
                 db.MakeCustomModifications(productCode, ApplicationName);
                 db.Commit();
             }
-            
+
             Log.LogMessage(MessageImportance.Normal, "MSI was successfully generated at {0}", destinationFilePath);
 
             return true;

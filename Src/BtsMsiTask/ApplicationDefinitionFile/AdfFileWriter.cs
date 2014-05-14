@@ -13,7 +13,7 @@ namespace BtsMsiTask.ApplicationDefinitionFile
         private static readonly XNamespace XsiNs = "http://www.w3.org/2001/XMLSchema-instance";
         private static readonly XNamespace XsdNs = "http://www.w3.org/2001/XMLSchema";
 
-        public string Write(IEnumerable<BizTalkAssemblyResource> resources, string applicationName, string description, IEnumerable<string> references, string version, string sourceLocation)
+        public string Write(IEnumerable<BaseResource> resources, string applicationName, string description, IEnumerable<string> references, string version, string sourceLocation)
         {
             var propertyNodes = GetPropertyNodes(applicationName, description, version);
             var resourceNodes = GetResourceNodes(resources, sourceLocation);
@@ -71,7 +71,7 @@ namespace BtsMsiTask.ApplicationDefinitionFile
             return new XElement(AdfNs + "File", new XAttribute("RelativePath", fileNode.RelativePath), new XAttribute("Key", fileNode.Key));
         }
 
-        private IEnumerable<ResourceNode> GetResourceNodes(IEnumerable<BizTalkAssemblyResource> resources, string sourceLocation)
+        private IEnumerable<ResourceNode> GetResourceNodes(IEnumerable<BaseResource> resources, string sourceLocation)
         {
             var resourceNodes = new List<ResourceNode>();
             foreach (var resource in resources)
@@ -82,21 +82,16 @@ namespace BtsMsiTask.ApplicationDefinitionFile
 
                 var location = string.IsNullOrEmpty(sourceLocation) ? resource.AssemblyFilePath : sourceLocation;
 
-                propertyNodes.Add(new PropertyNode { Name = "UpdateGac", Value = "True" });
-                propertyNodes.Add(new PropertyNode { Name = "Gacutil", Value = "True" });
-                propertyNodes.Add(new PropertyNode { Name = "Attributes", Value = "Archive" });
-                propertyNodes.Add(new PropertyNode { Name = "UpdateGacOnImport", Value = "True" });
-                propertyNodes.Add(new PropertyNode { Name = "Fullname", Value = resource.FullName });
-                propertyNodes.Add(new PropertyNode { Name = "UpdateOrchestrationStatus", Value = "True" });
-                propertyNodes.Add(new PropertyNode { Name = "RestartHostInstances", Value = "False" });
-                propertyNodes.Add(new PropertyNode { Name = "SourceLocation", Value = location });
-                propertyNodes.Add(new PropertyNode { Name = "DestinationLocation", Value = string.Concat(@"%BTAD_InstallDir%\", Path.GetFileName(resource.AssemblyFilePath)) });
-                propertyNodes.Add(new PropertyNode { Name = "CreationTime", Value = dateText });
-                propertyNodes.Add(new PropertyNode { Name = "LastAccessTime", Value = dateText });
-                propertyNodes.Add(new PropertyNode { Name = "LastWriteTime", Value = dateText });
-                propertyNodes.Add(new PropertyNode { Name = "ShortCabinetName", Value = resource.ShortCabinetName });
-
-                fileNodes.Add(new FileNode { Key = "Assembly", RelativePath = Path.GetFileName(resource.AssemblyFilePath) });
+                if (resource is BizTalkAssemblyResource)
+                {
+                    SetBtsAssemblyResourceNodes(propertyNodes, (BizTalkAssemblyResource)resource, location, dateText,
+                        fileNodes);
+                }
+                else
+                {
+                    SetBtsAssemblyResourceNodes(propertyNodes, (AssemblyResource)resource, location, dateText,
+                        fileNodes);
+                }
 
                 resourceNodes.Add(new ResourceNode
                 {
@@ -108,6 +103,55 @@ namespace BtsMsiTask.ApplicationDefinitionFile
             }
 
             return resourceNodes;
+        }
+
+        private static void SetBtsAssemblyResourceNodes(List<PropertyNode> propertyNodes, BizTalkAssemblyResource resource, string location,
+            string dateText, List<FileNode> fileNodes)
+        {
+            propertyNodes.Add(new PropertyNode { Name = "BackgroundWorker", Value = "System.ComponentModel.BackgroundWorker" });
+            propertyNodes.Add(new PropertyNode { Name = "UpdateGac", Value = "True" });
+            propertyNodes.Add(new PropertyNode { Name = "Gacutil", Value = "True" });
+            propertyNodes.Add(new PropertyNode { Name = "Attributes", Value = "Archive" });
+            propertyNodes.Add(new PropertyNode { Name = "UpdateGacOnImport", Value = "True" });
+            propertyNodes.Add(new PropertyNode { Name = "Fullname", Value = resource.FullName });
+            propertyNodes.Add(new PropertyNode { Name = "UpdateOrchestrationStatus", Value = "True" });
+            propertyNodes.Add(new PropertyNode { Name = "RestartHostInstances", Value = "False" });
+            propertyNodes.Add(new PropertyNode { Name = "SourceLocation", Value = location });
+            propertyNodes.Add(new PropertyNode
+            {
+                Name = "DestinationLocation",
+                Value = string.Concat(@"%BTAD_InstallDir%\", Path.GetFileName(resource.AssemblyFilePath))
+            });
+            propertyNodes.Add(new PropertyNode { Name = "CreationTime", Value = dateText });
+            propertyNodes.Add(new PropertyNode { Name = "LastAccessTime", Value = dateText });
+            propertyNodes.Add(new PropertyNode { Name = "LastWriteTime", Value = dateText });
+            propertyNodes.Add(new PropertyNode { Name = "ShortCabinetName", Value = resource.ShortCabinetName });
+
+            fileNodes.Add(new FileNode { Key = "Assembly", RelativePath = Path.GetFileName(resource.AssemblyFilePath) });
+        }
+
+        private static void SetBtsAssemblyResourceNodes(List<PropertyNode> propertyNodes, AssemblyResource resource, string location,
+           string dateText, List<FileNode> fileNodes)
+        {
+            propertyNodes.Add(new PropertyNode { Name = "Gacutil", Value = "True" });
+            propertyNodes.Add(new PropertyNode { Name = "UpdateGac", Value = "True" });
+            propertyNodes.Add(new PropertyNode { Name = "UpdateGacOnImport", Value = "True" });
+            propertyNodes.Add(new PropertyNode { Name = "Regasm", Value = "True" });
+            propertyNodes.Add(new PropertyNode { Name = "Regsvcs", Value = "True" });
+            propertyNodes.Add(new PropertyNode { Name = "SourceLocation", Value = location });
+            propertyNodes.Add(new PropertyNode
+            {
+                Name = "DestinationLocation",
+                Value = string.Concat(@"%BTAD_InstallDir%\", Path.GetFileName(resource.AssemblyFilePath))
+            });
+            propertyNodes.Add(new PropertyNode { Name = "Attributes", Value = "Archive" });
+
+            propertyNodes.Add(new PropertyNode { Name = "CreationTime", Value = dateText });
+            propertyNodes.Add(new PropertyNode { Name = "LastAccessTime", Value = dateText });
+            propertyNodes.Add(new PropertyNode { Name = "LastWriteTime", Value = dateText });
+            propertyNodes.Add(new PropertyNode { Name = "ShortCabinetName", Value = resource.ShortCabinetName });
+
+            fileNodes.Add(new FileNode { Key = "File", RelativePath = Path.GetFileName(resource.AssemblyFilePath) });
         }
 
         private IEnumerable<PropertyNode> GetPropertyNodes(string displayName, string description, string version)

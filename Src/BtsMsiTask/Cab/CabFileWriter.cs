@@ -8,7 +8,7 @@ namespace BtsMsiTask.Cab
 {
     internal class CabFileWriter
     {
-        internal string Write(IEnumerable<BizTalkAssemblyResource> resources)
+        internal string Write(IEnumerable<BaseResource> resources)
         {
             var index = 0;
 
