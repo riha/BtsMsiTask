@@ -4,7 +4,7 @@
 Download the project source and check the included sample for further information.
 
 ## Getting started ##
-Download the [latest release](http://blogblob.blob.core.windows.net/btsmsitask/BtsMsiTask-0.1.exe) and run the installer.
+Download the [latest release](http://blogblob.blob.core.windows.net/btsmsitask/BtsMsiTask-0.3.exe) and run the installer.
 
 Create a `Build.proj` file like below for the solution you like to generate a MSI package for.
 
@@ -17,10 +17,16 @@ Create a `Build.proj` file like below for the solution you like to generate a MS
 	    <ApplicationDescription>Test description ...</ApplicationDescription>
 	    <!--Optional-->
 	    <Version>1.0.0.1</Version>
+ 		<!--Optional-->
+    	<BuildNumber>Build 23456_2</BuildNumber>
+    	<!--Optional-->
+    	<SourceLocation>\\acme.com\drops$\Build 23456_2</SourceLocation>
 	  </PropertyGroup>
 	  <ItemGroup>
-		<!-- Add all resources to include in the MSI -->
-	    <Resource Include="..\BtsSample.Transforms\bin\Debug\BtsSample.Transforms.dll" />
+		<!-- Add all non BizTalk resources to include in the MSI -->
+		<Resource Include="..\BtsSample.Utilities\bin\Debug\BtsSample.Utilities.dll" />
+		<!-- Add all BizTalk resources to include in the MSI -->
+    	<BtsAssembly Include="..\BtsSample.Transforms\bin\Debug\BtsSample.Transforms.dll" />
 	  </ItemGroup>
 	  <ItemGroup>
 		<!-- Add possible referenced BizTalk Applications. Optional. -->
@@ -91,10 +97,25 @@ Finally call the `MsiTask` with the declared parameters.
 		<td>Optional</td>
 		<td>A possible version number added to the MSI. Uses a <i>1.0.0.0</i> format.</td>
 	</tr>
-    <tr>
-		<td>Resource (ItemGroup)</td>
-		<td><i>Required</i></td>
-		<td>A list of resources that should be added to the MSI.</td>
+ 	<tr>
+		<td>BuildNumber</td>
+		<td><i>Optional</i></td>
+		<td>If set if will be used as part of the MSI file name.</td>
+	</tr>
+ 	<tr>
+		<td>SourceLocation</td>
+		<td><i>Optional</i></td>
+		<td>If set will be part of the MSI property for source location and visible in the BizTalk Administration console.</td>
+	</tr>
+	<tr>
+		<td>BtsAssemblies (ItemGroup)</td>
+		<td><i>Optional</i></td>
+		<td>A list of <i>BizTalk</i> resources that should be added to the MSI.</td>
+	</tr>
+	<tr>
+		<td>Resources (ItemGroup)</td>
+		<td><i>Optional</i></td>
+		<td>A list of <i>Non BizTalk</i> resouses that should be added to the MSI.</td>
 	</tr>
     <tr>
 		<td>ReferenceApplication (ItemGroup)</td>
@@ -105,9 +126,12 @@ Finally call the `MsiTask` with the declared parameters.
  
 ## Limitations  ##
 - BtsMsiTask is currently only tested on BizTalk Server 2013 and BizTalk 2010.
-- BizTalk MSI packages allows for several different resources to be added (bindings, pre and post scripts, web service definitions, non BizTalk dll etc). BtsMsiTask currently however only support BizTalk Server dlls.  
+- BizTalk MSI packages allows for several different resources to be added (bindings, pre and post scripts, web service definitions, non BizTalk dll etc). BtsMsiTask currently however only support dlls (BizTalk and non BizTalk dlls).  
 
 ## Releases ##
 - **0.1** - [download](http://blogblob.blob.core.windows.net/btsmsitask/BtsMsiTask-0.1.exe)
-	- Initial release with a number of known limitations. 
+	- Initial release with a number of known limitations.
+- **0.3** - [download](http://blogblob.blob.core.windows.net/btsmsitask/BtsMsiTask-0.3.exe)
+	- Added a few extra properties to set as MsBuild properties.
+	- Added support for non BizTalk dll as part of MSI package.  
 
