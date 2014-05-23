@@ -51,12 +51,12 @@ namespace BtsMsiTask
         public string SourceLocation { get; set; }
 
         /// <summary>
-        /// All the dll an other resources that should be packed as part of the MSI.
+        /// All the BizTalk dlls that should be packed as part of the MSI.
         /// </summary>
         public ITaskItem[] BtsAssemblies { get; set; }
 
         /// <summary>
-        /// 
+        /// All the non BizTalk dlls that should be packed as part of the MSI.
         /// </summary>
         public ITaskItem[] Resources { get; set; }
 
@@ -84,7 +84,7 @@ namespace BtsMsiTask
             if (!Directory.Exists(DestinationPath))
                 Directory.CreateDirectory((DestinationPath));
 
-            if (!BtsAssemblies.Any() && !Resources.Any())
+            if ((BtsAssemblies == null || !BtsAssemblies.Any()) && (Resources == null || !Resources.Any()))
             {
                 throw new ArgumentException("No BizTalk Assemblies and no assembly resources found in build project input");
             }
@@ -93,10 +93,14 @@ namespace BtsMsiTask
             // TODO: Check all required in parameters and set possible defaults
             // TODO: Check that it's BT 2013 server from registry
             // TODO: Is it possible to check if assembly is signed or not?
-            // TODO: Check that these are only BizTalk resources for now
 
-            var resources = BtsAssemblies.Select(r => new BizTalkAssemblyResource(r.GetMetadata("Fullpath"))).ToList<BaseResource>();
-            resources.AddRange(Resources.Select(r => new AssemblyResource(r.GetMetadata("Fullpath"))).ToList());
+            var resources = new List<BaseResource>();
+
+            if (BtsAssemblies != null && BtsAssemblies.Any())
+                resources.AddRange(BtsAssemblies.Select(r => new BizTalkAssemblyResource(r.GetMetadata("Fullpath"))));
+
+            if (Resources != null && Resources.Any())
+                resources.AddRange(Resources.Select(r => new AssemblyResource(r.GetMetadata("Fullpath"))));
 
             var references = new List<string> { "BizTalk.System" };
             if (References != null)
