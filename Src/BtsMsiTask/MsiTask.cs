@@ -1,4 +1,5 @@
-﻿using BtsMsiTask.ApplicationDefinitionFile;
+﻿using System.Reflection;
+using BtsMsiTask.ApplicationDefinitionFile;
 using BtsMsiTask.Cab;
 using BtsMsiTask.Model;
 using BtsMsiTask.Msi;
@@ -70,6 +71,8 @@ namespace BtsMsiTask
         /// </summary>
         public override bool Execute()
         {
+            Log.LogMessage(MessageImportance.High, "Executing MsiTask version {0}", Assembly.GetExecutingAssembly().GetName().Version);
+
             Version version;
             try
             {
