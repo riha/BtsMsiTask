@@ -8,7 +8,7 @@
     <!--Optional-->
     <Version>1.0.0.1</Version>
     <!--Optional-->
-    <FileName>Build 23456_2</FileName>
+    <FileName>Build 23456_2.msi</FileName>
     <!--Optional-->
     <SourceLocation>\\acme.com\drops$\Build 23456_2</SourceLocation>
   </PropertyGroup>
