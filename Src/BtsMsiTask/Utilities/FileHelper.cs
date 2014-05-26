@@ -6,11 +6,9 @@ namespace BtsMsiTask.Utilities
 {
     public static class FileHelper
     {
-        public static string GetMsiFileName(string applicationName, string buildNumber)
+        public static string GetMsiFileName(string applicationName, string fileName)
         {
-            return !string.IsNullOrEmpty(buildNumber) 
-                ? string.Concat(buildNumber, ".msi") 
-                : string.Concat(applicationName, DateTime.Now.ToString("-yyyyMMddHHmmss"), ".msi");
+            return !string.IsNullOrEmpty(fileName) ? fileName : string.Concat(applicationName, DateTime.Now.ToString("-yyyyMMddHHmmss"), ".msi");
         }
 
         public static string GetValidFilename(string filename)
@@ -21,7 +19,7 @@ namespace BtsMsiTask.Utilities
             list.Add(Path.DirectorySeparatorChar);
             list.Add(Path.AltDirectorySeparatorChar);
             list.Add(Path.PathSeparator);
-            
+
             foreach (char oldChar in list)
                 filename = filename.Replace(oldChar, '_');
 
@@ -45,7 +43,7 @@ namespace BtsMsiTask.Utilities
             list.Add(Path.DirectorySeparatorChar);
             list.Add(Path.AltDirectorySeparatorChar);
             list.Add(Path.PathSeparator);
-            
+
             foreach (char oldChar in list)
                 filename = filename.Replace(oldChar, '-');
 

@@ -42,9 +42,9 @@ namespace BtsMsiTask
         public string Version { get; set; }
 
         /// <summary>
-        /// Optional build number. If set if will be part of the MSI file name.
+        /// Optional file name. If set if will dictate the MSI file name.
         /// </summary>
-        public string BuildNumber { get; set; }
+        public string FileName { get; set; }
 
         /// <summary>
         /// Optional source location path. If set if will be part of the MSI property for source location and visible in the BizTalk Administration console.
@@ -87,6 +87,12 @@ namespace BtsMsiTask
             if (!Directory.Exists(DestinationPath))
                 Directory.CreateDirectory((DestinationPath));
 
+            if (!string.IsNullOrEmpty(FileName) && Path.GetExtension(FileName) != ".msi")
+            {
+                Log.LogError("MSI file name has to end with file suffix '.MSI'", Version);
+                return false;
+            }
+
             if ((BtsAssemblies == null || !BtsAssemblies.Any()) && (Resources == null || !Resources.Any()))
             {
                 throw new ArgumentException("No BizTalk Assemblies and no assembly resources found in build project input");
@@ -115,7 +121,7 @@ namespace BtsMsiTask
             var adfFileWriter = new AdfFileWriter();
             var adfFilePath = adfFileWriter.Write(resources, ApplicationName, ApplicationDescription, references, version.ToString(), SourceLocation);
 
-            var destinationFilePath = Path.Combine(DestinationPath, FileHelper.GetMsiFileName(ApplicationName, BuildNumber));
+            var destinationFilePath = Path.Combine(DestinationPath, FileHelper.GetMsiFileName(ApplicationName, FileName));
             MsiFileWriter.Write(destinationFilePath);
 
             var productCode = Guid.NewGuid();
