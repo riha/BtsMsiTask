@@ -25,6 +25,6 @@
     <Copy SourceFiles="@(AddtionalFiles)" DestinationFolder="$(DeployFolder)" />
   </Target>
   <Target Name="Package">
-    <Exec command="..\Tools\NSIS\makensis.exe /DVersion=0.3 /DDestination=&quot;$(MSBuildExtensionsPath)&quot;  Package.nsi" WorkingDirectory="" />
+    <Exec command="..\Tools\NSIS\makensis.exe /DVersion=0.4.0 /DDestination=&quot;$(MSBuildExtensionsPath)&quot;  Package.nsi" WorkingDirectory="" />
   </Target>
 </Project>
