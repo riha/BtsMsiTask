@@ -89,7 +89,7 @@ namespace BtsMsiTask.ApplicationDefinitionFile
                 }
                 else
                 {
-                    SetBtsAssemblyResourceNodes(propertyNodes, (AssemblyResource)resource, location, dateText,
+                    SetAssemblyResourceNodes(propertyNodes, (AssemblyResource)resource, location, dateText,
                         fileNodes);
                 }
 
@@ -116,7 +116,7 @@ namespace BtsMsiTask.ApplicationDefinitionFile
             propertyNodes.Add(new PropertyNode { Name = "Fullname", Value = resource.FullName });
             propertyNodes.Add(new PropertyNode { Name = "UpdateOrchestrationStatus", Value = "True" });
             propertyNodes.Add(new PropertyNode { Name = "RestartHostInstances", Value = "False" });
-            propertyNodes.Add(new PropertyNode { Name = "SourceLocation", Value = location });
+            propertyNodes.Add(new PropertyNode { Name = "SourceLocation", Value = Path.Combine(location, Path.GetFileName(resource.AssemblyFilePath)) });
             propertyNodes.Add(new PropertyNode
             {
                 Name = "DestinationLocation",
@@ -130,7 +130,7 @@ namespace BtsMsiTask.ApplicationDefinitionFile
             fileNodes.Add(new FileNode { Key = "Assembly", RelativePath = Path.GetFileName(resource.AssemblyFilePath) });
         }
 
-        private static void SetBtsAssemblyResourceNodes(List<PropertyNode> propertyNodes, AssemblyResource resource, string location,
+        private static void SetAssemblyResourceNodes(List<PropertyNode> propertyNodes, AssemblyResource resource, string location,
            string dateText, List<FileNode> fileNodes)
         {
             propertyNodes.Add(new PropertyNode { Name = "Gacutil", Value = "True" });
@@ -138,7 +138,7 @@ namespace BtsMsiTask.ApplicationDefinitionFile
             propertyNodes.Add(new PropertyNode { Name = "UpdateGacOnImport", Value = "True" });
             propertyNodes.Add(new PropertyNode { Name = "Regasm", Value = "True" });
             propertyNodes.Add(new PropertyNode { Name = "Regsvcs", Value = "True" });
-            propertyNodes.Add(new PropertyNode { Name = "SourceLocation", Value = location });
+            propertyNodes.Add(new PropertyNode { Name = "SourceLocation", Value = Path.Combine(location, Path.GetFileName(resource.AssemblyFilePath)) });
             propertyNodes.Add(new PropertyNode
             {
                 Name = "DestinationLocation",
