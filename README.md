@@ -18,14 +18,14 @@ Create a `Build.proj` file like below for the solution you like to generate a MS
 	    <!--Optional-->
 	    <Version>1.0.0.1</Version>
  		<!--Optional-->
-    	<BuildNumber>Build 23456_2</BuildNumber>
+    	<FileName>Build 23456_2</FileName>
     	<!--Optional-->
     	<SourceLocation>\\acme.com\drops$\Build 23456_2</SourceLocation>
 	  </PropertyGroup>
 	  <ItemGroup>
-		<!-- Add all non BizTalk resources to include in the MSI -->
+		<!-- Add all non BizTalk resources to include in the MSI as Resource nodes -->
 		<Resource Include="..\BtsSample.Utilities\bin\Debug\BtsSample.Utilities.dll" />
-		<!-- Add all BizTalk resources to include in the MSI -->
+		<!-- Add all BizTalk resources to include in the MSI as BtsAssembly nodes -->
     	<BtsAssembly Include="..\BtsSample.Transforms\bin\Debug\BtsSample.Transforms.dll" />
 	  </ItemGroup>
 	  <ItemGroup>
@@ -35,9 +35,13 @@ Create a `Build.proj` file like below for the solution you like to generate a MS
 	  <Target Name="GenerateMsi">
 	    <MsiTask  ApplicationDescription="$(ApplicationDescription)"
 	              Version="$(Version)"
+				  FileName="$(FileName)"
 	              DestinationPath="$(DestinationPath)"
+                  SourceLocation="$(SourceLocation)"
 	              ApplicationName="$(ApplicationName)"
-	              Resources="@(Resource)" />
+                  BtsAssemblies="@(BtsAssembly)"
+	              Resources="@(Resource)" 
+                  ReferenceApplications="@(ReferenceApplication)" />
 	  </Target>
 	</Project>
 
@@ -46,20 +50,19 @@ The `Import` node references the BtsMsiTask MSBuild targets file from the instal
 
 `DestinationPath` sets the location to were the final MSI should be generated. `ApplicationName` sets the name of the BizTalk Application. 
 
-The `Resource` ItemGroup list all the resources to include in the final MSI.
+The `Resource` ItemGroup list all the resources to include in the final MSI. Resource can be of two different types: BizTalk resources and non-BizTalk resources.
 
     <ItemGroup>
-		<Resource Include="..\BtsSample.Transforms\bin\Debug\BtsSample.Transforms.dll" />
- 		<Resource Include="..\BtsSample.Schemas\bin\Debug\BtsSample.Schemas.dll" />
+		<Resource Include="..\BtsSample.Utilities\bin\Debug\BtsSample.Utilities.dll" />
+ 		<BtsAssembly Include="..\BtsSample.Transforms\bin\Debug\BtsSample.Transforms.dll" />
 	</ItemGroup>
 
 Finally call the `MsiTask` with the declared parameters.
 
-    <MsiTask  ApplicationDescription="$(ApplicationDescription)"
-      Version="$(Version)"
+    <MsiTask  
       DestinationPath="$(DestinationPath)" 
       ApplicationName="$(ApplicationName)" 
-      Resources="@(Resource)" />
+      BtsAssemblies="@(BtsAssembly)" />
       </Target>
     </Project> 
 
@@ -98,9 +101,9 @@ Finally call the `MsiTask` with the declared parameters.
 		<td>A possible version number added to the MSI. Uses a <i>1.0.0.0</i> format.</td>
 	</tr>
  	<tr>
-		<td>BuildNumber</td>
+		<td>FileName</td>
 		<td><i>Optional</i></td>
-		<td>If set if will be used as part of the MSI file name.</td>
+		<td>If set if will be used as the MSI file name.</td>
 	</tr>
  	<tr>
 		<td>SourceLocation</td>
@@ -118,7 +121,7 @@ Finally call the `MsiTask` with the declared parameters.
 		<td>A list of <i>Non BizTalk</i> resouses that should be added to the MSI.</td>
 	</tr>
     <tr>
-		<td>ReferenceApplication (ItemGroup)</td>
+		<td>ReferenceApplications (ItemGroup)</td>
 		<td>Optional</td>
 		<td>List of BizTalk application that should be refernces as the MIS is imported. By default the <i>System.BizTalk</i> is added.</td>
 	</tr>
