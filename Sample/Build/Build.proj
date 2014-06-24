@@ -31,6 +31,7 @@
               SourceLocation="$(SourceLocation)"
               ApplicationName="$(ApplicationName)"
               BtsAssemblies="@(BtsAssembly)"
-              Resources="@(Resource)" />
+              Resources="@(Resource)" 
+              ReferenceApplications="@(ReferenceApplication)"/>
   </Target>
 </Project>

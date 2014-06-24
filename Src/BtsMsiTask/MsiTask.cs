@@ -64,7 +64,7 @@ namespace BtsMsiTask
         /// <summary>
         /// Possible references to other BizTalk Application
         /// </summary>
-        public ITaskItem[] References { get; set; }
+        public ITaskItem[] ReferenceApplications { get; set; }
 
         /// <summary>
         /// MSBuild entry point for generating a MSI file based on a BizTalk Server project.
@@ -112,8 +112,8 @@ namespace BtsMsiTask
                 resources.AddRange(Resources.Select(r => new AssemblyResource(r.GetMetadata("Fullpath"))));
 
             var references = new List<string> { "BizTalk.System" };
-            if (References != null)
-                references.AddRange(References.Select(reference => reference.ItemSpec));
+            if (ReferenceApplications != null)
+                references.AddRange(ReferenceApplications.Select(reference => reference.ItemSpec));
 
             var cabFileWriter = new CabFileWriter();
             var cabFolderPath = cabFileWriter.Write(resources);
