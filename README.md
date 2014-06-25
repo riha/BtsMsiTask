@@ -136,5 +136,8 @@ Finally call the `MsiTask` with the declared parameters.
 	- Initial release with a number of known limitations.
 - **0.3** - [download](http://blogblob.blob.core.windows.net/btsmsitask/BtsMsiTask-0.3.exe)
 	- Added a few extra properties to set as MsBuild properties.
-	- Added support for non BizTalk dll as part of MSI package.  
+	- Added support for non BizTalk dll as part of MSI package.
+- **0.5** - [download](http://blogblob.blob.core.windows.net/btsmsitask/BtsMsiTask-0.5.13.exe)
+	- Changed a few build parameter names.
+	- Added auomated build server.    
 
