@@ -4,7 +4,7 @@
 Download the project source and check the included sample for further information.
 
 ## Getting started ##
-Download the [latest release](http://blogblob.blob.core.windows.net/btsmsitask/BtsMsiTask-0.3.exe) and run the installer.
+Download the [latest release](http://blogblob.blob.core.windows.net/btsmsitask/BtsMsiTask-0.5.13.exe) and run the installer.
 
 Create a `Build.proj` file like below for the solution you like to generate a MSI package for.
 
