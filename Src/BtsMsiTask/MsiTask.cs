@@ -20,19 +20,24 @@ namespace BtsMsiTask
     public class MsiTask : Task
     {
         /// <summary>
-        /// Full path to the final destination of the MSI. In a build server scenario this would the folder that's being compiled to.
+        /// Path to the final destination of the MSI. 
+        /// In a build server scenario this would the folder that's being compiled to.
+        /// Example: 'C:\Temp\BtsSample'
         /// </summary>
         [Required]
         public string DestinationPath { get; set; }
 
         /// <summary>
-        /// The name of the BizTalk application. Used when importing the MSI in BizTalk to either create a new application or update an existing.
+        /// The name of the BizTalk application. 
+        /// Used when importing the MSI in BizTalk to either create a new application or to match and update an existing.
+        /// Example: 'BtsSampleApp'
         /// </summary>
         [Required]
         public string ApplicationName { get; set; }
 
         /// <summary>
-        /// Optional BizTalk Application description. Updated or created when importing MSI.
+        /// Optional BizTalk Application description. 
+        /// Updated or created when importing MSI.
         /// </summary>
         public string ApplicationDescription { get; set; }
 
@@ -43,11 +48,14 @@ namespace BtsMsiTask
 
         /// <summary>
         /// Optional file name. If set if will dictate the MSI file name.
+        /// Example: 'Build 23456_2.msi'
         /// </summary>
         public string FileName { get; set; }
 
         /// <summary>
-        /// Optional source location path. If set if will be part of the MSI property for source location and visible in the BizTalk Administration console.
+        /// Optional source location path. 
+        /// If set if will be part of the MSI property for source location and visible in the BizTalk Administration console.
+        /// Example: '\\acme.com\drops$\Build 23456_2'
         /// </summary>
         public string SourceLocation { get; set; }
 
@@ -101,6 +109,7 @@ namespace BtsMsiTask
             // TODO: Add all checking of parameters to separate classes
             // TODO: Check all required in parameters and set possible defaults
             // TODO: Check that it's BT 2013 server from registry
+            // TODO: Add better and cleaner error messages to msbuild output
             // TODO: Is it possible to check if assembly is signed or not?
 
             var resources = new List<BaseResource>();
