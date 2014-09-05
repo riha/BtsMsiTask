@@ -15,13 +15,11 @@ BtsMsiTask uses the exact same techniques as BizTalk Server does when exporting 
 By reverse engineering we extracted the functionality and wrapped it in a stand alone library, not tied to the BizTalk Server infrastructure in any way.
 Any complied dll can now directly be packages into a BizTalk specific MSI.
 
-In BtsMsiTask project we choose to package the functionality as a MsBuild task. This reason for this is that it suited our needs to use in a build server scenarion.
-
-TODO: Skall ha en enkel bild som visar två dll:er som man ksickar in till msbuild och som sen bara blir en msi och in till biztalk.
+In BtsMsiTask project we choose to package the functionality as a MsBuild task. This reason for this is that it suited our needs to use in a build server scenario.
 
 ## Getting started
 
-Getting started using BtsMsiTask involves three simple steps.
+To get started and generate your first MSI you will have to follow the simple steps.
 
 **1. Download and install**
 
@@ -53,7 +51,7 @@ but a simple proj file could look something like this.
     	</Target>
     </Project>
 
-**3. Run!**
+**3. Run MsbUild**
 
 Run MsBuild and point it to the created .proj file: `msbuild mypropj.proj`
 
