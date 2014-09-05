@@ -4,9 +4,10 @@ layout: default
 
 <img style="float: right;padding:30px 10px 10px 10px;" src="assets/direct.png" />
 
-<p class="abstract"><strong>We think MSI files are great and should be easier to create from BizTalk Server!</strong> MSI:s provides an easy way to package a set of files and adds extra goodiness to ease deployment - especially when using using BizTalk Server.</p> 
+<p class="abstract"><strong>We think MSI files are great and should be easier to create from BizTalk Server!</strong> MSI:s provides an easy way to package a set of files and adds extra goodiness to ease deployment - especially when using BizTalk Server.</p> 
 
-<p class="abstract">Traditionally the way to package BizTalk artifacts to an MSI involved installing the artifacts to a BizTalk Server and exporting them. <strong>BtsMsiTask however provides a way to package compiled artifacts directly into a MSI, without having to first installing them to a BizTalk Server.</strong></p>
+<p class="abstract">Traditionally the way to package BizTalk artifacts to an MSI involved installing the artifacts to a BizTalk Server and exporting them.</p>
+<p class="abstract"><strong>BtsMsiTask however provides a way to package compiled artifacts directly into a MSI, without having to first installing them to a BizTalk Server.</strong> <a href="https://github.com/riha/BtsMsiTask">Open source</a> and <a href="{{ site.latest_download }}">free</a>.</p>
 
 ## How does it work?
 
@@ -24,7 +25,7 @@ Getting started using BtsMsiTask involves three simple steps.
 
 **1. Download and install**
 
-BtsMsiTask is delived as a installer that can be [downloaded here](http://blogblob.blob.core.windows.net/btsmsitask/BtsMsiTask-1.0.16.exe). 
+BtsMsiTask is delived as a installer that can be [downloaded here]({{ site.latest_download }}). 
 Running it will by default try and install the binaries that MSBuild task in the default MsBuild extension folder on your machine `C:\Program Files (x86)\MSBuild\`.
 
 **2. Create a MsBuild project file**
