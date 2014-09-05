@@ -4,7 +4,7 @@ layout: default
 
 <img style="float: right;padding:30px 10px 10px 10px;" src="assets/direct.png" />
 
-<p class="abstract"><strong>We think MSI files are great and should be easier to create from BizTalk Server!</strong> MSI:s provides an easy way to package a set of files and adds extra goodiness to ease deployment - especially when using BizTalk Server.</p> 
+<p class="abstract"><strong>We think MSI files are great should be smoother to use when developing for BizTalk Server.</strong> MSI:s provides an easy way to package a set of files and adds extra goodiness to ease deployment - especially when using BizTalk Server.</p> 
 
 <p class="abstract">Traditionally the way to package BizTalk artifacts to an MSI involved installing the artifacts to a BizTalk Server and exporting them.</p>
 <p class="abstract"><strong>BtsMsiTask however provides a way to package compiled artifacts directly into a MSI, without having to first installing them to a BizTalk Server.</strong> <a href="https://github.com/riha/BtsMsiTask">Open source</a> and <a href="{{ site.latest_download }}">free</a>.</p>
