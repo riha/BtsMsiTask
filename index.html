@@ -1,0 +1,47 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>BtsMsiTask by riha</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <script src="javascripts/scale.fix.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1 class="header">BtsMsiTask</h1>
+        <p class="header">Simple msbuild task for generating MSI packages directly from a BizTalk solution without having to first install to BizTalk Server</p>
+
+        <ul>
+          <li class="download"><a class="buttons" href="https://github.com/riha/BtsMsiTask/zipball/master">Download ZIP</a></li>
+          <li class="download"><a class="buttons" href="https://github.com/riha/BtsMsiTask/tarball/master">Download TAR</a></li>
+          <li><a class="buttons github" href="https://github.com/riha/BtsMsiTask">View On GitHub</a></li>
+        </ul>
+
+        <p class="header">This project is maintained by <a class="header name" href="https://github.com/riha">riha</a></p>
+
+
+      </header>
+      <section>
+        <p>MSI files are great. MSI:s provides an easy way to package a set of files, add attributes, dependency information and even extra functionally to ease deployment. Traditionally the way to package BizTalk artifacts to an MSI has involved installing the artifacts to a BizTalk server and exporting them. With BtsMsiTask it however possible to package compiled artifacts directly into a MSI package without having to first installing them to a BizTalk Server.</p>
+
+<h2>
+<a name="how-does-it-work" class="anchor" href="#how-does-it-work"><span class="octicon octicon-link"></span></a>How does it work?</h2>
+
+<p>BtsMsiTask uses the exact same techniques as BizTalk Server does when exporting a MSI form the server. By reverse engineering we extracted the functionality and wrapped it in a stand alone library, not tied to the BizTalk Server infrastructure in any way. Any complied dll can now directly be packages into a BizTalk specific MSI without any further hassle.</p>
+      </section>
+      <footer>
+        <p><small>Hosted on <a href="http://pages.github.com">GitHub Pages</a> using the Dinky theme</small></p>
+      </footer>
+    </div>
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+		
+  </body>
+</html>
