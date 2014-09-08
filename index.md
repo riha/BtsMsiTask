@@ -26,7 +26,7 @@ Running it will by default install the binaries in the default MsBuild extension
 
 **2. Create a MsBuild project file**
 
-As BtsMsiTask executes as a MsBuild task you need to setup a `.proj` file to act as input to MsBuild. The `.proj` file will tell MuBuild what files to include in the MSI, where to write the file to and so on. There are a number of properties that can be set and they are listed [in detail here](/available-parameters), but a simple proj file could look something like this.
+As BtsMsiTask executes as a MsBuild task you need to setup a `.proj` file to act as input to MsBuild. The `.proj` file will tell MuBuild what files to include in the MSI, where to write the file to and so on. There are a number of properties that can be set and they are listed [in detail here]({{ site.baseurl}}/available-parameters), but a simple proj file could look something like this.
 
     <Project DefaultTargets="GenerateMsi" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
     	<Import Project="$(MSBuildExtensionsPath)\BtsMsiTask.targets" />

@@ -3,7 +3,7 @@ layout: default
 ---
 ## Project file example ##
 
-The following example show a advanced project file with all [optional parameters](/available-parameters) set. A more basic example can be found [here](https://raw.githubusercontent.com/riha/BtsMsiTask/tree/gh-pages/assets/simple-advanced.proj).
+The following example show a advanced project file with all [optional parameters]({{ site.baseurl}}/available-parameters) set. A more basic example can be found [here](https://raw.githubusercontent.com/riha/BtsMsiTask/tree/gh-pages/assets/simple-advanced.proj).
 
     <Project DefaultTargets="GenerateMsi" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
     <Import Project="$(MSBuildExtensionsPath)\BtsMsiTask\BtsMsiTask.targets" />
