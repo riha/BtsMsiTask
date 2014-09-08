@@ -53,7 +53,7 @@ h1, h2, h3 {
 }
 
 h1 {
-    font-size: 30px;
+    font-size: 30px!Important;
 }
 
 h2 {
@@ -62,7 +62,7 @@ h2 {
 
 a {
     color: #C30000;
-    font-weight: 200;
+    
     text-decoration: none;
 }
 
@@ -221,14 +221,15 @@ p.header {
     font-size: 16px;
 }
 
-h1.header {
+h1.header, h1.header a {
     font-family: "Open Sans", Helvetica, Arial, sans-serif;
 	text-shadow: 1px 1px 1px #ccc;
     font-size: 35px;
-    font-weight: 650;
+    font-weight: 650!important;
     line-height: 1.3em;
     border-bottom: none;
     margin-top: 0;
+	text-decoration: none;
 }
 
 
@@ -239,6 +240,8 @@ h1.header, a.header, a.name, header a {
 a.header {
     text-decoration: underline;
 }
+
+
 
 a.name {
     white-space: nowrap;
@@ -272,6 +275,11 @@ section {
 		font-family: "Open Sans", Helvetica, Arial, sans-serif;
         font-size: 1.2em;
 		line-height:1.5;
+}
+
+/* typicons */
+[class*="typicons-"]:before {
+  font-family: 'Typicons', sans-serif;
 }
 
 

@@ -1,7 +1,9 @@
 ---
 layout: default
 ---
-## Example ##
+## Project file example ##
+
+The following example show a advanced project file with all [optional parameters](/available-parameters) set. A more basic example can be found [here](https://raw.githubusercontent.com/riha/BtsMsiTask/tree/gh-pages/assets/simple-advanced.proj).
 
     <Project DefaultTargets="GenerateMsi" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
     <Import Project="$(MSBuildExtensionsPath)\BtsMsiTask\BtsMsiTask.targets" />
@@ -40,22 +42,30 @@ layout: default
     	</Target>
     </Project>
 
+Download the file [here](https://raw.githubusercontent.com/riha/BtsMsiTask/tree/gh-pages/assets/proj-advanced.proj).
+
+### Import  Node###
 The `Import` node references the BtsMsiTask MSBuild targets file from the installation folder.
 
-`DestinationPath` sets the location to were the final MSI should be generated. `ApplicationName` sets the name of the BizTalk Application. 
+### "DestinationPath" property###
+`DestinationPath` sets the location to were the final MSI should be generated. 
 
-The `Resource` ItemGroup list all the resources to include in the final MSI. Resource can be of two different types: BizTalk resources and non-BizTalk resources.
+### "ApplicationName" property###
+`ApplicationName` sets the name of the BizTalk Application. 
+
+### Resource ItemGroup property###
+The `Resource` ItemGroup list all the resources to include in the final MSI. Resource can be of two different types: *BizTalk resources* and *non-BizTalk resources*.
 
     <ItemGroup>
 		<Resource Include="..\BtsSample.Utilities\bin\Debug\BtsSample.Utilities.dll" />
  		<BtsAssembly Include="..\BtsSample.Transforms\bin\Debug\BtsSample.Transforms.dll" />
 	</ItemGroup>
 
-Finally call the `MsiTask` with the declared parameters.
+### Import  Node###
+Finally call the `MsiTask` target with the declared parameters.
 
     <MsiTask  
       DestinationPath="$(DestinationPath)" 
       ApplicationName="$(ApplicationName)" 
+      Resources="@(Resource)
       BtsAssemblies="@(BtsAssembly)" />
-      </Target>
-    </Project> 
