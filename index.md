@@ -47,9 +47,9 @@ As BtsMsiTask executes as a MsBuild task you need to setup a `.proj` file to act
     	</Target>
     </Project>
 
-Download the file [here](https://raw.githubusercontent.com/riha/BtsMsiTask/tree/gh-pages/assets/proj-simple.proj).
+Download file [here](https://github.com/riha/BtsMsiTask/blob/gh-pages/assets/proj-simple.proj).
 
-**3. Run MsbUild**
+**3. Run MsBuild**
 
 Run MsBuild and point it to the created project file: `msbuild mypropj.proj`
 
