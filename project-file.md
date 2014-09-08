@@ -61,7 +61,7 @@ The `Resource` ItemGroup list all the resources to include in the final MSI. Res
  		<BtsAssembly Include="..\BtsSample.Transforms\bin\Debug\BtsSample.Transforms.dll" />
 	</ItemGroup>
 
-### Import  Node###
+### MsiTask  target ###
 Finally call the `MsiTask` target with the declared parameters.
 
     <MsiTask  

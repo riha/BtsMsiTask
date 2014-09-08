@@ -4,7 +4,7 @@ title:	'Available parameters'
 ---
 ## Parameters ##
 
-The tables show all available parameters. 
+The table show all available parameters. 
 
 <table border="0" cellpadding="0" cellspacing="0" id="tasksTable">
     <tr>
@@ -30,7 +30,7 @@ The tables show all available parameters.
  	<tr>
 		<td>FileName</td>
 		<td><i>Optional</i></td>
-		<td>If set if will be used as the MSI file name. Defaults to <code>ApplicationName-yyyyMMddHHmmss</code><br />Example: <code>Build 23456_2.msi</code></td>
+		<td>If set if will be used as a specific file name.<br />Defaults to <code>ApplicationName-yyyyMMddHHmmss</code><br />Example: <code>Build 23456_2.msi</code></td>
 	</tr>
  	<tr>
 		<td>SourceLocation</td>
