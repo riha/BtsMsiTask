@@ -24,6 +24,7 @@
   <Target Name="GenerateMsi">
     <MsiTask  ApplicationDescription="$(ApplicationDescription)"
               FileName="$(FileName)"
+              Version="1.0.0.0" 
               DestinationPath="$(DestinationPath)"
               SourceLocation="$(SourceLocation)"
               ApplicationName="$(ApplicationName)"

@@ -37,6 +37,12 @@ namespace BtsMsiTask
         public string ApplicationDescription { get; set; }
 
         /// <summary>
+        /// Optional version, will be added to the MSI properties.
+        /// Deprecated. Will be ignored. 
+        /// </summary>
+        public string Version { get; set; }
+
+        /// <summary>
         /// Optional file name. If set if will dictate the MSI file name.
         /// Example: 'Build 23456_2.msi'
         /// </summary>
