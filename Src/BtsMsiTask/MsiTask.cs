@@ -1,12 +1,7 @@
 ﻿using System.Reflection;
-using BtsMsiTask.ApplicationDefinitionFile;
-using BtsMsiTask.Cab;
-using BtsMsiTask.Model;
-using BtsMsiTask.Msi;
-using BtsMsiTask.Utilities;
+using BtsMsiLib.Model;
 using Microsoft.Build.Framework;
 using Microsoft.Build.Utilities;
-using Microsoft.Deployment.WindowsInstaller;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -40,11 +35,6 @@ namespace BtsMsiTask
         /// Updated or created when importing MSI.
         /// </summary>
         public string ApplicationDescription { get; set; }
-
-        /// <summary>
-        /// Optional version, will be added to the MSI properties.
-        /// </summary>
-        public string Version { get; set; }
 
         /// <summary>
         /// Optional file name. If set if will dictate the MSI file name.
@@ -81,23 +71,12 @@ namespace BtsMsiTask
         {
             Log.LogMessage(MessageImportance.High, "Executing MsiTask version {0}", Assembly.GetExecutingAssembly().GetName().Version);
 
-            Version version;
-            try
-            {
-                version = !string.IsNullOrEmpty(Version) ? new Version(Version) : new Version("1.0.0.0");
-            }
-            catch (FormatException)
-            {
-                Log.LogError("Version format {0} is invalid, needs to be in format of 1.0.0.0", Version);
-                throw;
-            }
-
             if (!Directory.Exists(DestinationPath))
                 Directory.CreateDirectory((DestinationPath));
 
             if (!string.IsNullOrEmpty(FileName) && Path.GetExtension(FileName) != ".msi")
             {
-                Log.LogError("MSI file name has to end with file suffix '.MSI'", Version);
+                Log.LogError("MSI file name has to end with file suffix '.MSI'");
                 return false;
             }
 
@@ -112,39 +91,31 @@ namespace BtsMsiTask
             // TODO: Add better and cleaner error messages to msbuild output
             // TODO: Is it possible to check if assembly is signed or not?
 
-            var resources = new List<BaseResource>();
+            var resources = new List<Resource>();
 
             if (BtsAssemblies != null && BtsAssemblies.Any())
-                resources.AddRange(BtsAssemblies.Select(r => new BizTalkAssemblyResource(r.GetMetadata("Fullpath"))));
+                resources.AddRange(BtsAssemblies.Select(r => new Resource(r.GetMetadata("Fullpath"), ResourceType.BtsResource)));
 
             if (Resources != null && Resources.Any())
-                resources.AddRange(Resources.Select(r => new AssemblyResource(r.GetMetadata("Fullpath"))));
+                resources.AddRange(Resources.Select(r => new Resource(r.GetMetadata("Fullpath"), ResourceType.Resource)));
 
             var references = new List<string> { "BizTalk.System" };
             if (ReferenceApplications != null)
                 references.AddRange(ReferenceApplications.Select(reference => reference.ItemSpec));
 
-            var cabFileWriter = new CabFileWriter();
-            var cabFolderPath = cabFileWriter.Write(resources);
-
-            var adfFileWriter = new AdfFileWriter();
-            var adfFilePath = adfFileWriter.Write(resources, ApplicationName, ApplicationDescription, references, version.ToString(), SourceLocation);
-
-            var destinationFilePath = Path.Combine(DestinationPath, FileHelper.GetMsiFileName(ApplicationName, FileName));
-            MsiFileWriter.Write(destinationFilePath);
-
-            var productCode = Guid.NewGuid();
-            var upgradeCode = Guid.NewGuid();
-            var properties = MsiFileWriter.GetProperties(ApplicationName, version, productCode, upgradeCode);
-            using (var db = new Database(destinationFilePath, DatabaseOpenMode.Direct))
+            var btsApplication = new BtsApplication(ApplicationName)
             {
-                db.UpdateSummaryInfo();
-                db.UpdateUpgradeTable(upgradeCode);
-                db.UpdateProperties(properties);
-                db.UpdateFileContent(cabFolderPath, adfFilePath, resources.Count());
-                db.MakeCustomModifications(productCode, ApplicationName);
-                db.Commit();
-            }
+                Description = ApplicationDescription,
+                ReferencedApplications = references.ToArray()
+            };
+            
+            var msiWriter = new BtsMsiLib.MsiWriter();
+            var msiFile = msiWriter.Write(btsApplication, resources.ToArray());
+
+            //TODO
+            var destinationFilePath = DestinationPath + @"\test.msi";
+
+            using (var destinationFile = File.Create(destinationFilePath)) { msiFile.CopyTo(destinationFile); }
 
             Log.LogMessage(MessageImportance.Normal, "MSI was successfully generated at {0}", destinationFilePath);
 

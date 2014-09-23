@@ -5,8 +5,8 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("BtsMsi")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyTitle("BtsMsiLib")]
+[assembly: AssemblyDescription("Library for packaging resources in a BizTalk MSI")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("BtsMsi")]
