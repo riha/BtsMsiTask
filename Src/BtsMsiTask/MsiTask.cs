@@ -118,8 +118,7 @@ namespace BtsMsiTask
             var msiWriter = new BtsMsiLib.MsiWriter();
             var msiFile = msiWriter.Write(btsApplication, resources.ToArray());
 
-            //TODO
-            var destinationFilePath = DestinationPath + @"\test.msi";
+            var destinationFilePath = Path.Combine(DestinationPath, FileHelper.GetMsiFileName(ApplicationName, FileName));
 
             using (var destinationFile = File.Create(destinationFilePath)) { msiFile.CopyTo(destinationFile); }
 
