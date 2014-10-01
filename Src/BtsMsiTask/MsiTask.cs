@@ -105,7 +105,7 @@ namespace BtsMsiTask
             if (Resources != null && Resources.Any())
                 resources.AddRange(Resources.Select(r => new Resource(r.GetMetadata("Fullpath"), ResourceType.Resource)));
 
-            var references = new List<string> { "BizTalk.System" };
+            var references = new List<string>();
             if (ReferenceApplications != null)
                 references.AddRange(ReferenceApplications.Select(reference => reference.ItemSpec));
 
