@@ -30,8 +30,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="BtsMsiLib">
-      <HintPath>..\packages\BtsMsiLib.1.0.0-beta\lib\net45\BtsMsiLib.dll</HintPath>
+    <Reference Include="BtsMsiLib, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\BtsMsiLib.1.0.2.0\lib\net45\BtsMsiLib.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Build.Framework" />
     <Reference Include="Microsoft.Build.Utilities.v4.0" />
@@ -41,6 +42,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FileHelper.cs" />
     <Compile Include="MsiTask.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
