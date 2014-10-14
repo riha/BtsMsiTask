@@ -4,7 +4,7 @@
 */ 
 
 !define Name "BtsMsiTask"
-#Name "${Name}"
+Name "${Name}"
 
 Outfile "..\${Name}-${Version}.exe"
 
