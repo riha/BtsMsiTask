@@ -104,6 +104,9 @@ namespace BtsMsiTask
             if (Resources != null && Resources.Any())
                 resources.AddRange(Resources.Select(r => new Resource(r.GetMetadata("Fullpath"), ResourceType.Resource)));
 
+            if (!string.IsNullOrEmpty(SourceLocation))
+                resources.ForEach(r => r.SourceLocation = SourceLocation);
+
             var references = new List<string>();
             if (ReferenceApplications != null)
                 references.AddRange(ReferenceApplications.Select(reference => reference.ItemSpec));
