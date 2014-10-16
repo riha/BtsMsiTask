@@ -32,7 +32,7 @@
   <ItemGroup>
     <Reference Include="BtsMsiLib, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\BtsMsiLib.1.0.2.0\lib\net45\BtsMsiLib.dll</HintPath>
+      <HintPath>..\packages\BtsMsiLib.1.1.2.0\lib\net45\BtsMsiLib.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Build.Framework" />
     <Reference Include="Microsoft.Build.Utilities.v4.0" />
