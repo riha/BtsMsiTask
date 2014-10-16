@@ -4,8 +4,11 @@ title: 'Changelog'
 ---
 
 ## Versions ##
-
-- **1.0** - [download]({{ site.latest_download }})
+- **1.1** - [download]({{ site.latest_download }})
+	- Fixed issue with temp folders not being removed.
+	- Typo in installer.
+	- Fixes issue with SourceLocation property not being set. 
+- **1.0** - [download](http://blogblob.blob.core.windows.net/btsmsitask/BtsMsiTask-1.1.21.exe)
 	- Updated documentation and and comments.
 - **0.5** - [download](http://blogblob.blob.core.windows.net/btsmsitask/BtsMsiTask-0.5.13.exe)
 	- Changed build parameter names.
