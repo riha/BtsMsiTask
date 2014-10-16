@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
   <metadata>
     <id>BtsMsiLib</id>
-    <version>1.0.2.0</version>
+    <version>1.1.2.0</version>
     <title>BtsMsiLib</title>
     <authors>Richard Hallgren</authors>
     <owners>Richard Hallgren</owners>
