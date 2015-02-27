@@ -49,8 +49,6 @@ The `.proj` file will tell MsBuild what files to include in the MSI, where to wr
     	</Target>
     </Project>
 
-Download file [here](https://github.com/riha/BtsMsiTask/blob/gh-pages/assets/proj-simple.proj).
-
 ### 3. Run MsBuild ###
 
 Run MsBuild and point it to the created project file: `msbuild myprojfile.proj`
