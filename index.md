@@ -17,7 +17,7 @@ BtsMsiTask currently executes as a [MsBuild](http://en.wikipedia.org/wiki/MSBuil
 
 ## Getting started
 
-Follow these three simple steps to get started and generate your first MSI.
+Follow these three simple steps to get started and generate your first MSI. If using Team Foundation Build Services you'll find a specific walkthrough [here](http://richardhallgren.com/build-and-generate-msi-for-biztalk-server-using-team-foundation-build-services/).
 
 ### 1. Download and install ###
 
