@@ -2,8 +2,7 @@
 layout: default
 ---
 
-<img style="float: right;padding:10px 10px 10px 10px;" src="https://www.dropbox.com/s/h7j0klslvbxj6mv/top-banner.png?raw=1" />
-
+<img style="float: right;padding:30px 10px 10px 10px;" src="assets/direct.png" />
 
 <p class="abstract"><strong>MSI files are great!</strong> MSI:s provides an easy way to package a set of files and adds extra goodiness to ease deployment - <em>especially</em> when using BizTalk Server.</p> 
 
